@@ -1,12 +1,14 @@
-const Card = () => {
+const Card = ({data}) => {
+    const {title, price, images, category: {name}} = data;
+    
     return (
         <div className="bg-white cursor-pointer w-56 h-60 rounded-lg">
             <figure className="relative mb-2 w-full h-4/5">
-                <span className="absolute bottom-0 left-0 bg-white/60 rounded-lg text-black text-xs m-2 px-3 py-0.5">Electronics</span>
+                <span className="absolute bottom-0 left-0 bg-white/60 rounded-lg text-black text-xs m-2 px-3 py-0.5">{name}</span>
                 <img 
-                    src="https://images.pexels.com/photos/1037992/pexels-photo-1037992.jpeg" 
+                    src={images[0]} 
                     className="w-full h-full object-cover rounded-lg"
-                    alt="headphones" 
+                    alt={title} 
                 />
                 <div 
                     className="absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 rounded-full m-2 p-1"
@@ -15,8 +17,8 @@ const Card = () => {
                 </div>
             </figure>
             <p className="flex justify-between">
-                <span className="text-sm font-light">Headphones</span>
-                <span className="text-lg font-medium">$199</span>
+                <span className="text-sm font-light">{title.slice(0, 25) + (title.length > 25 ? '...' : '')}</span>
+                <span className="text-lg font-medium">${price.toFixed(2)}</span>
             </p>
         </div>
     )
