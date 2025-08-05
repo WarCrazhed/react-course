@@ -4,12 +4,19 @@ import { ShoppingCartContext } from "../../Context";
 
 const Card = ({data}) => {
     const {title, price, images, category: {name}} = data;
-    const {count, setCount, openProductDetail, setProductToShow} = useContext(ShoppingCartContext);
+    const {count, setCount, openProductDetail, setProductToShow, cartProducts, setCartProducts} = useContext(ShoppingCartContext);
 
     const showProduct = (productDetail) => {
         openProductDetail()
         setProductToShow(productDetail)
     }
+
+    const addProductToCart = (productData) => {
+        setCount(count + 1);
+        setCartProducts([...cartProducts, productData]);
+        console.log(cartProducts);
+    }
+
 
     return (
         <div
@@ -26,7 +33,7 @@ const Card = ({data}) => {
                 <div 
                     className="absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 rounded-full m-2 p-1"
                     onClick={() => {
-                        setCount(count + 1);
+                        addProductToCart(data);
                     }}
                 >
                     <PlusIcon className="size-6" />

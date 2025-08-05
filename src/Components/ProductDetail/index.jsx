@@ -4,7 +4,6 @@ import { ShoppingCartContext } from '../../Context';
 
 const ProductDetail = () => {
     const { isProductDetailOpen, closeProductDetail, productToShow } = useContext(ShoppingCartContext);
-    console.log('Product to show ', productToShow);
 
     return (
         <aside
@@ -22,7 +21,7 @@ const ProductDetail = () => {
             <figure className='px-6'>
                 <img
                     className='w-full h-full rounded-lg'
-                    src={productToShow.images[0]}
+                    src={productToShow.images?.[0]}
                     alt={productToShow.title}
                 />
             </figure>
