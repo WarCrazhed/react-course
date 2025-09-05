@@ -23,7 +23,7 @@ function MyOrder() {
             </div>
             <div className="flex flex-col w-80">
                 {
-                    order?.[orderIndex].products?.map((product) => (
+                    order?.[orderIndex]?.products?.map((product) => (
                         <OrderCard
                             key={product.id}
                             id={product.id}

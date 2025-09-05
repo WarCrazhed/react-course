@@ -1,4 +1,5 @@
-import { createContext, useState } from "react"
+import { createContext, useEffect, useState } from "react"
+import apiUrl from "../api";
 
 export const ShoppingCartContext = createContext();
 
@@ -23,10 +24,38 @@ export const ShoppingCartProvider = ({ children }) => {
 
     // Shopping Cart | Add products to cart
     const [cartProducts, setCartProducts] = useState([])
-    
+
     // Shopping Cart | Order
     const [order, setOrder] = useState([])
 
+    // Get products
+    const [items, setItems] = useState([]);
+    const [filteredItems, setFilteredItems] = useState([]);
+
+    // Get products by title
+    const [searchByTitle, setSearchByTitle] = useState(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const res = await fetch(`${apiUrl}/products`);
+                const data = await res.json();
+                setItems(data);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        fetchData();
+    }, [])
+
+    const filteredItemsByTitle = (items, searchByTitle) => {
+        return items?.filter(item => item.title.toLowerCase().includes(searchByTitle.toLowerCase()));
+    }
+
+    useEffect(() => {
+        if (searchByTitle) setFilteredItems(filteredItemsByTitle(items, searchByTitle));
+        else setFilteredItems(items);
+    }, [items, searchByTitle])
 
     return (
         <ShoppingCartContext.Provider
@@ -45,6 +74,11 @@ export const ShoppingCartProvider = ({ children }) => {
                 setCartProducts,
                 order,
                 setOrder,
+                items,
+                setItems,
+                searchByTitle,
+                setSearchByTitle,
+                filteredItems,
             }}
         >
             {children}
