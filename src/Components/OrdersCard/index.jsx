@@ -1,12 +1,12 @@
 import { ChevronRightIcon } from '@heroicons/react/24/solid'
 
-const OrdersCard = ({ totalPrice, totalProducts }) => {
+const OrdersCard = ({ date, totalPrice, totalProducts }) => {
 
     return (
         <div className='flex justify-between items-center mb-3 border border-black rounded-lg p-4 w-80 gap-3'>
             <div className='flex justify-between w-full'>
                 <div className="flex flex-col">
-                <span className='font-light'>01.02.23</span>
+                <span className='font-light text-xs text-neutral-600'>{ date.toLocaleDateString('es-MX', { year: 'numeric', month: 'long', day: 'numeric' }) }</span>
                 <span className='font-light'>{totalProducts} articles</span>
                 </div>
                 <div className='flex items-center gap-2'>

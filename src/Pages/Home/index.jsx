@@ -1,40 +1,31 @@
+// En el componente Home.jsx
+
+// Importa filteredItems del contexto
 import { useContext } from "react"
 import Card from "../../Components/Card"
 import ProductDetail from "../../Components/ProductDetail";
 import { ShoppingCartContext } from "../../Context";
 
 function Home() {
-    const { items, searchByTitle, setSearchByTitle, filteredItems } = useContext(ShoppingCartContext);
+    const { setSearchByTitle, filteredItems } = useContext(ShoppingCartContext);
 
+    // ✅ La lógica de renderizado se simplifica para usar siempre filteredItems
     const renderView = () => {
-        if (searchByTitle?.length > 0) {
-            if (filteredItems?.length > 0) {
-                return (
-                    filteredItems?.map(item => (
-                        <Card
-                            key={item.id}
-                            data={item}
-                        />
-                    ))
-                )
-            } else {
-                return (
-                    <div>
-                        <h2>We didn't find any products for this search :(</h2>
-                    </div>
-                )
-            }
+        if (filteredItems?.length > 0) {
+            return filteredItems.map(item => (
+                <Card
+                    key={item.id}
+                    data={item}
+                />
+            ));
         } else {
             return (
-                items?.map(item => (
-                    <Card
-                        key={item.id}
-                        data={item}
-                    />
-                ))
-            )
+                <div>
+                    <h2>We didn't find any products for this search :(</h2>
+                </div>
+            );
         }
-    }
+    };
 
     return (
         <>
@@ -52,7 +43,7 @@ function Home() {
             </section>
             <ProductDetail />
         </>
-    )
+    );
 }
 
-export default Home
+export default Home;

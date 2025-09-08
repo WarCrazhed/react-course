@@ -14,6 +14,7 @@ const AppRoutes = () => {
             element: <Layout />,
             children: [
                 { index: true, element: <Home /> },
+                { path: '/:category', element: <Home /> },
                 { path: '/my-orders', element: <MyOrders /> },
                 { path: '/my-orders/:index', element: <MyOrder /> },
                 { path: '/my-orders/last', element: <MyOrder /> },

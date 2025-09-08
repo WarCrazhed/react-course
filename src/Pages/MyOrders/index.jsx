@@ -18,6 +18,7 @@ function MyOrders() {
                         key={index}
                     >
                         <OrdersCard
+                            date={order.date}
                             totalPrice={order.totalPrice}
                             totalProducts={order.totalProducts}
                         />

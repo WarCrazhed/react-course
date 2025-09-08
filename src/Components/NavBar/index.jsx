@@ -16,7 +16,7 @@ const NavItem = ({ to, children, isActive }) => {
 }
 
 const NavBar = () => {
-    const {count} = useContext(ShoppingCartContext);
+    const {cartProducts} = useContext(ShoppingCartContext);
 
     return (
         <nav className="flex justify-between items-center fixed z-10 top-0 w-full py-5 px-8 text-sm font-light bg-white/80 backdrop-blur-xs">
@@ -51,7 +51,7 @@ const NavBar = () => {
                 </li>
                 <li>
                     <NavItem
-                        to='/furnitures'
+                        to='/furniture'
                     >
                         Furnitures
                     </NavItem>
@@ -97,7 +97,7 @@ const NavBar = () => {
                     </NavItem>
                 </li>
                 <li className="flex items-center">
-                    <ShoppingBagIcon className="size-6"/><span>{count}</span>
+                    <ShoppingBagIcon className="size-6"/><span>{cartProducts.length}</span>
                 </li>
             </ul>
         </nav>

@@ -6,7 +6,7 @@ import { totalPrice } from "../../utils";
 import { Link } from "react-router-dom";
 
 const CheckoutSideMenu = () => {
-    const { isCheckoutSideMenuOpen, closeCheckoutSideMenu, cartProducts, setCartProducts, order, setOrder } = useContext(ShoppingCartContext);
+    const { isCheckoutSideMenuOpen, closeCheckoutSideMenu, cartProducts, setCartProducts, order, setOrder, setSearchByTitle } = useContext(ShoppingCartContext);
 
     const handleDelete = (id) => {
         const filteredProducts = cartProducts.filter(product => product.id !== id);
@@ -15,15 +15,16 @@ const CheckoutSideMenu = () => {
 
     const handleCheckout = () => {
         const orderToAdd = {
-            date: '01.02.23',
+            date: new Date(),
             products: cartProducts,
             totalProducts: cartProducts.length,
             totalPrice: totalPrice(cartProducts)
         }
 
         setOrder([...order, orderToAdd])
-        
         setCartProducts([])
+        setSearchByTitle(null)
+        closeCheckoutSideMenu()
     }
 
     return (
