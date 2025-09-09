@@ -21,7 +21,11 @@ const Layout = () => {
             <NavBar />
             <CheckoutSideMenu />
             <Outlet />
-        </div>
+            <div className="mb-40" />
+            <footer className="w-full h-20 flex items-center justify-center fixed bottom-0 bg-white/50 backdrop-blur-md">
+                <p className="text-black/60">Shopi <span className="font-bold text-black">{new Date().getFullYear()}</span></p>
+            </footer >
+        </div >
     );
 };
 
