@@ -1,9 +1,11 @@
 import { useContext } from 'react';
 import { XMarkIcon } from '@heroicons/react/24/solid'
 import { ShoppingCartContext } from '../../Context';
+import { useImgValidate } from '../../hooks/useImgValidate';
 
 const ProductDetail = () => {
     const { isProductDetailOpen, closeProductDetail, productToShow } = useContext(ShoppingCartContext);
+    const { imageError, handleImageError } = useImgValidate();
 
     return (
         <aside
@@ -19,11 +21,18 @@ const ProductDetail = () => {
                 </button>
             </div>
             <figure className='px-6'>
-                <img
-                    className='w-full h-full rounded-lg'
-                    src={productToShow.images?.[0]}
-                    alt={productToShow.title}
-                />
+                {imageError ? (
+                    <div className="flex items-center justify-center w-full h-48 bg-gradient-to-b from-gray-50 to-gray-100 rounded-lg text-gray-400 text-sm text-center p-4 shadow-md">
+                        Image Not Available
+                    </div>
+                ) : (
+                    <img
+                        className='w-full h-full rounded-lg shadow-md object-cover'
+                        src={productToShow.images?.[0]}
+                        alt={productToShow.title}
+                        onError={handleImageError}
+                    />
+                )}
             </figure>
             <p className="flex flex-col p-6">
                 <span className='font-medium text-2xl mb-2'>{productToShow.price}</span>
